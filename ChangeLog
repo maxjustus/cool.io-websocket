@@ -1,4 +1,8 @@
 
+2011-1-15 version 0.1.4:
+
+** change all references to Rev to Cool.io
+
 2010-07-22 version 0.1.3:
 
   * rescue all StandardErrors on_readable

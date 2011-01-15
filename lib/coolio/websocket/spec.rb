@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-module Rev
+module Coolio
 	class WebSocket < TCPSocket
 
 		module Spec75

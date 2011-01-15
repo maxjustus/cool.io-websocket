@@ -3,13 +3,13 @@
 # See ./rpc file which sends messages to this program.
 
 require 'rubygems'
-require 'rev/websocket'
+require 'cool.io-websocket'
 require 'msgpack/rpc'
 require 'json'
 
 $sockets = {}
 
-class MyConnection < Rev::WebSocket
+class MyConnection < Cool.io::WebSocket
 	def on_open
 		puts "WebSocket opened from '#{peeraddr[2]}': request=#{request.inspect}"
 		$sockets[self] = self
@@ -35,9 +35,9 @@ port = ARGV[0] || 8081
 
 rpc_port = 18800
 
-loop = Rev::Loop.default
+loop = Cool.io::Loop.default
 
-ws = Rev::WebSocketServer.new(host, port, MyConnection)
+ws = Cool.io::WebSocketServer.new(host, port, MyConnection)
 ws.attach(loop)
 
 rpc = MessagePack::RPC::Server.new(loop)

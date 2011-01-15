@@ -1,7 +1,7 @@
 # Publisher/Subscriber-style message routing
 
 require 'rubygems'
-require 'rev/websocket'
+require 'cool.io-websocket'
 require 'json'
 
 class PubSub
@@ -39,7 +39,7 @@ end
 $pubsub = PubSub.new
 $record = []
 
-class ShoutChatConnection < Rev::WebSocket
+class ShoutChatConnection < Cool.io::WebSocket
 	def on_open
 		@host = peeraddr[2]
 		puts "connection opened: <#{@host}>"
@@ -70,10 +70,10 @@ end
 host = '0.0.0.0'
 port = ARGV[0] || 8081
 
-server = Rev::WebSocketServer.new(host, port, ShoutChatConnection)
-server.attach(Rev::Loop.default)
+server = Cool.io::WebSocketServer.new(host, port, ShoutChatConnection)
+server.attach(Cool.io::Loop.default)
 
 puts "start on #{host}:#{port}"
 
-Rev::Loop.default.run
+Cool.io::Loop.default.run
 

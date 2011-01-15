@@ -1,16 +1,16 @@
-= Rev-WebSocket
+= Cool.io-WebSocket
 
-Rev-WebSocket is a WebSocket server implementation based on Rev,
+Cool.io-WebSocket is a WebSocket server implementation based on Cool.io,
 a high performance event-driven I/O library for Ruby.
 
 This library conforms to WebSocket draft-75 and draft-76.
 
-- http://github.com/frsyuki/rev-websocket
+- http://github.com/maxjustus/cool.io-websocket
 
 
 == Installation
 
-    gem install rev-websocket
+    gem install cool.io-websocket
 
 
 == Examples
@@ -19,14 +19,14 @@ This library conforms to WebSocket draft-75 and draft-76.
 - examples/shoutchat.rb - simple chat application.
 - examples/rpc.rb - pushes messages to browsers from programs separated from the web socket server.
 
-See examples/README.md[http://github.com/frsyuki/rev-websocket/tree/master/examples/] for details.
+See examples/README.md[http://github.com/maxjustus/cool.io-websocket/tree/master/examples/] for details.
 
 === Simple echo server
 
     require 'rubygems'
-    require 'rev/websocket'
+    require 'cool.io-websocket'
     
-    class MyConnection < Rev::WebSocket
+    class MyConnection < Cool.io::WebSocket
       def on_open
         puts "WebSocket opened"
         send_message("Hello, world!")
@@ -45,15 +45,15 @@ See examples/README.md[http://github.com/frsyuki/rev-websocket/tree/master/examp
     host = '0.0.0.0'
     port = '8080'
     
-    server = Rev::WebSocketServer.new(host, port, MyConnection)
-    server.attach(Rev::Loop.default)
+    server = Cool.io::WebSocketServer.new(host, port, MyConnection)
+    server.attach(Cool.io::Loop.default)
     
-    Rev::Loop.default.run
+    Cool.io::Loop.default.run
 
 
 === Publisher/Subscriber-style message routing
     require 'rubygems'
-    require 'rev/websocket'
+    require 'cool.io-websocket'
     
     class PubSub
       def initialize
@@ -80,7 +80,7 @@ See examples/README.md[http://github.com/frsyuki/rev-websocket/tree/master/examp
     
     $pubsub = PubSub.new
     
-    class MyConnection < Rev::WebSocket
+    class MyConnection < Cool.io::WebSocket
       def on_open
         puts "WebSocket opened"
         @sid = $pubsub.subscribe {|data|
@@ -102,17 +102,17 @@ See examples/README.md[http://github.com/frsyuki/rev-websocket/tree/master/examp
     host = '0.0.0.0'
     port = ARGV[0] || 8080
     
-    server = Rev::WebSocketServer.new(host, port, MyConnection)
-    server.attach(Rev::Loop.default)
+    server = Cool.io::WebSocketServer.new(host, port, MyConnection)
+    server.attach(Cool.io::Loop.default)
     
     puts "start on #{host}:#{port}"
     
-    Rev::Loop.default.run
+    Cool.io::Loop.default.run
 
 
 == Learn more
 
-- [Rev API reference] http://rev.rubyforge.org/rdoc/
+- [Cool.io API reference] http://rev.rubyforge.org/rdoc/
 - [JSON for object serialization] http://github.com/brianmario/yajl-ruby
 - [MessagePack for object serialization] http://msgpack.org/
 - [The WebSocket protocol draft-76] http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-76

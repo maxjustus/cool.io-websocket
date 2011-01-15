@@ -1,8 +1,8 @@
-require 'rev'
+require 'cool.io'
 require File.dirname(__FILE__)+'/websocket/spec'
 require 'thin_parser'
 
-module Rev
+module Coolio
 	class WebSocketServer < TCPServer
 		def initialize(host, port = nil, klass = WebSocket, *args, &block)
 			super

@@ -1,9 +1,9 @@
 # WebSocket echo server
 
 require 'rubygems'
-require 'rev/websocket'
+require 'cool.io-websocket'
 
-class EchoConnection < Rev::WebSocket
+class EchoConnection < Cool.io::WebSocket
 	def on_open
 		puts "WebSocket opened from '#{peeraddr[2]}': request=#{request.inspect}"
 		send_message("server: Hello, world!")
@@ -22,10 +22,10 @@ end
 host = '0.0.0.0'
 port = ARGV[0] || 8081
 
-server = Rev::WebSocketServer.new(host, port, EchoConnection)
-server.attach(Rev::Loop.default)
+server = Cool.io::WebSocketServer.new(host, port, EchoConnection)
+server.attach(Cool.io::Loop.default)
 
 puts "start on #{host}:#{port}"
 
-Rev::Loop.default.run
+Cool.io::Loop.default.run
 
